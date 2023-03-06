@@ -1,0 +1,1163 @@
+\documentclass{beamer}
+
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{footline}[frame number]
+\setbeamertemplate{itemize items}[circle]
+\setbeamersize{text margin left=7mm,text margin right=7mm} 
+
+% Theorem
+\definecolor{blendedblue}{rgb}{0.2,0.2,0.7}
+\setbeamertemplate{blocks}[rounded]
+\setbeamercolor{block title}{bg=blendedblue, fg=white}
+\setbeamercolor{block body}{bg=blendedblue!10}
+
+\setbeamerfont{itemize/enumerate body}{size = \normalsize}
+\setbeamerfont{itemize/enumerate subbody}{size = \normalsize}
+\setbeamerfont{itemize/enumerate subsubbody}{size = \normalsize}
+
+% Math
+\usefonttheme[onlymath]{serif}
+\usepackage{bbm}
+\DeclareMathOperator*{\argmax}{arg\,max}
+
+\usepackage{multirow}
+
+% Color
+
+\colorlet{shadecolor}{gray!40}
+
+% Appendix page number
+\newcommand{\backupbegin}{
+   \newcounter{framenumberappendix}
+   \setcounter{framenumberappendix}{\value{framenumber}}
+}
+\newcommand{\backupend}{
+   \addtocounter{framenumberappendix}{-\value{framenumber}}
+   \addtocounter{framenumber}{\value{framenumberappendix}} 
+}
+
+
+\title{Frictional Inventor Markets and Knowledge Diffusion}
+%\subtitle{}
+\author{Yasutaka Koike-Mori\thanks{UCLA, 4th year}, Toshitaka Maruyama\thanks{UCLA, 3rd year}, Koki Okumura\thanks{UCLA, 3rd year}}
+%\institute{UCLA}
+\date{March 6, 2022}
+
+\begin{document}
+
+\begin{frame}[noframenumbering,plain]
+  \titlepage
+\end{frame}
+
+\begin{frame}{Inventor Mobility and Knowledge Diffusion}
+  \begin{itemize}
+    \setlength\itemsep{3mm}
+    \item Literature on inventor mobility and knowledge diffusion
+          \begin{itemize}
+            \item Inventor mobility facilitates knowledge diffusion across firms
+          \end{itemize}
+
+    \item {\bf Labor markets} where inventors and firms match would play important roles
+          \begin{itemize}
+            \item Firms' hiring decision
+            \item Inventors' job choice
+          \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Impact of Inventor Market Frictions?}
+  \begin{itemize}
+    \setlength\itemsep{3mm}
+    \item Inventor market frictions $\rightarrow$ \\ \begin{itemize}
+            \item inventor mobility?
+            \item in-house R\&D activity?
+            \item knowledge diffusion?
+            \item economic growth?
+          \end{itemize}
+    \item Environment
+          \begin{itemize}
+            \item Inventors and firms match in frictional labor markets
+            \item Inventors engage in in-house R\&D
+            \item Poaching firms learn from poached firms
+          \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{New Theory and Data}
+  \begin{itemize}
+    \setlength\itemsep{3mm}
+    \item Endogenous growth model of inventor market frictions
+          \begin{itemize}
+            \item Literature on knowledge diffusion and growth / international
+            \item Literature on firm dynamics and labor market frictions
+          \end{itemize}
+    \item German administrative data
+          \begin{itemize}
+            \item inventors' patent information
+            \item their labor market career
+            \item their employing establishment
+          \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Literature}
+  \begin{itemize}
+    \setlength\itemsep{3mm}
+    \item Inventor mobility and knowledge diffusion
+          \begin{itemize}
+            \item \footnotesize{Song, Almeida, and Wu (2003); Almeida, Dokko, and Rosenkopf(2003); Breschi and Lissoni (2009); Singh and Agrawal (2011)}
+          \end{itemize}
+    \item Knowledge diffusion and growth / international / spacial
+          \begin{itemize}
+            \item \footnotesize{ Lucas and Moll (2014); Akcigit et. al. (2018); Buera and Oberfield (2020); Benhabib, Perla, and Tonetti (2021); Prato (2022); Crews (2023)}
+          \end{itemize}
+    \item Labor market frictions and firm dynamics
+          \begin{itemize}
+            \item \footnotesize{Kaas and Kircher (2015); Schaal (2017); Elsby and Gottfries (2021); Bilal, Engbom, Mongey, and Violante (2022)}
+          \end{itemize}
+    \item Labor market frictions and knowledge diffusion
+          \begin{itemize}
+            \item \footnotesize{Herkenhoff, Lise, Menzio, and Phillips (2018); Shi (2022)}
+          \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Today's Outline}
+  \begin{enumerate}
+    \setlength\itemsep{3mm}
+    \item Characteristics of inventors' job flow
+    \item Comparison with general workers
+    \item Endogenous growth model of inventor market frictions
+    \item Numerical exercises
+  \end{enumerate}
+\end{frame}
+
+
+\begin{frame}[c,noframenumbering,plain]{}
+  \centering
+  {\LARGE Characteristics of Inventors' Job Flow}
+\end{frame}
+
+\frame{
+  \frametitle{INV-BIO Data}
+  \begin{itemize}
+    \item What are the characteristics of inventors' job flows?
+          \bigskip
+    \item Investigate using German linked inventor biography data (INV-BIO)
+          \smallskip
+          \begin{itemize}
+            \item[--] Inventors’ patent information (EPO)
+              \\+ Employer-employee match data (Germany)
+              \smallskip
+            \item[--] 1980 - 2014
+              \smallskip
+            \item[--] 152,350 inventors (have patents during 1998-2014)
+            \item[--]  643,856 patents
+          \end{itemize}
+  \end{itemize}
+}
+
+\frame{
+  \frametitle{Available Variables in INV-BIO}
+  \begin{itemize}
+    \setlength\itemsep{3mm}
+    \item  Inventors' biography
+          \begin{itemize}
+            \item age, education, place, nationality, ...
+          \end{itemize}
+    \item Employment characteristics
+          \begin{itemize}
+            \item wage, occupation, unemployment status, ...
+          \end{itemize}
+    \item Establishment characteristics
+          \begin{itemize}
+            \item industry, age(1975-), \# of employees, mean wage, place, ...
+          \end{itemize}
+    \item Patent characteristics
+          \begin{itemize}
+            \item date, citations, technology area, ...
+          \end{itemize}
+  \end{itemize}
+}
+
+\frame{
+  \frametitle{Inventor's Job  Flows: Methods}
+  \begin{itemize}
+    \item Classified establishments into the ranks based on their productivity/knowledge
+          \bigskip
+    \item Proxy for productivity/knowledge of establishments: \hypertarget{14}{}\hyperlink{13}{\beamerbutton{distribution}}
+          \smallskip
+          \begin{enumerate}
+            \item Patent citations per inventor
+                  \smallskip
+            \item Number of employees
+                  \smallskip
+            \item Mean wage
+          \end{enumerate}
+          \bigskip
+    \item Analyze inventor mobility across the ranks
+  \end{itemize}
+}
+
+\frame{
+  \frametitle{Inventor's Job  Flows: Citation/Inventors \hypertarget{8}{}\hyperlink{7}{\beamerbutton{robustness}}\hyperlink{5}{\beamerbutton{calibration}}}
+  \begin{table}[t]
+    \begin{center}\footnotesize
+      \begin{tabular}{ccccccccc
+        }
+        \hline\hline
+        \multicolumn{2}{c}{\multirow{2}{*}{Share of total flow (\%) }} & \multicolumn{6}{c}{Destination est. citations per inventor}                                                                                                                               \\
+                                                                       &                                                             & $\leq$50\%           & 50-60                & 60-70                & 70-80                & 80-90                & 90-100   \\\hline
+                                                                       &                                                             &                      &                      &                      &                      &                      &        & \\
+                                                                       & $\leq$50\%                                                  & 0.7                  & 0.2                  & 0.2                  & 0.3                  & 0.5                  & 0.8      \\
+                                                                       &                                                             &                      &                      &                      &                      &                      &          \\
+                                                                       & 50-60                                                       & \textcolor{red}{1.1} & 0.4                  & 0.3                  & 0.5                  & 1.0                  & 1.5      \\
+                                                                       &                                                             &                      &                      &                      &                      &                      &          \\
+                                                                       & 60-70                                                       & \textcolor{red}{1.2} & \textcolor{red}{0.4} & 0.4                  & 0.7                  & 1.3                  & 1.8      \\
+        Origin est.                                                    &                                                             &                      &                      &                      &                      &                      &          \\
+        citations                                                      & 70-80                                                       & \textcolor{red}{2.4} & \textcolor{red}{0.7} & \textcolor{red}{0.8} & 1.7                  & 3.0                  & 4.1      \\
+        per inventor                                                   &                                                             &                      &                      &                      &                      &                      &          \\
+                                                                       & 80-90                                                       & \textcolor{red}{5.1} & \textcolor{red}{1.2} & \textcolor{red}{1.4} & \textcolor{red}{3.3} & 8.8                  & 10.4     \\
+                                                                       &                                                             &                      &                      &                      &                      &                      &          \\
+                                                                       & 90-100                                                      & \textcolor{red}{7.2} & \textcolor{red}{1.6} & \textcolor{red}{1.6} & \textcolor{red}{3.7} & \textcolor{red}{9.9} & 20.1     \\
+        \\\hline
+      \end{tabular}
+    \end{center}
+    \vspace{0.05in}
+    \footnotesize{\tiny\textit{Notes:} As a productivity measure, we use 3-year backward moving averages of the number of 5-year forward citations. The table shows the total gross flow from 1983 to 2014. }
+  \end{table}
+  \begin{itemize}
+    \item Higher $\rightarrow$ Lower: \textcolor{red}{41.5}, Lower $\rightarrow$ Higher: 26.5
+  \end{itemize}
+}
+
+
+\begin{frame}[c,noframenumbering,plain]{}
+  \centering
+  {\LARGE Comparison with General Workers}
+\end{frame}
+
+\frame{
+  \frametitle{Difference from General Workers }
+  \begin{itemize}
+    \item How different is inventors' job flow from general workers?
+          \bigskip
+    \item Investigate using the linked employer-employee data in Germany
+          \medskip
+    \item[] \textbf{Sample of Integrated Labour Market Biographies (SIAB)}
+      \smallskip
+      \begin{itemize}
+        \item[--] 2\% random sample of administrative data
+          \smallskip
+        \item[--]  2000 - 2019
+          \smallskip
+        \item[--] 1,940,961 individuals
+      \end{itemize}
+  \end{itemize}
+}
+
+
+\frame{
+  \frametitle{How to Identify Inventors in SIAB}
+  \begin{itemize}
+    \item From German inventor biography data (INV-BIO), identify the following occupations that most inventors belong to
+          \smallskip
+          \begin{itemize}
+            \footnotesize
+            \item[--] "research and development" (20.2\%\footnote{Percentage of inventors belonging to the occupations in INV-BIO})
+            \item[--] "machine-building and operations" (19.8\%)
+            \item[--] "mathematics, biology, and physics" (19.1\%)
+            \item[--] "mechatronics, energy, and electronics" (18.8\%)
+          \end{itemize}
+          \bigskip
+    \item Assumption: workers in above occup in SIAB $\approx$ inventors \hypertarget{2}{}\hyperlink{1}{\beamerbutton{identified inventors}}
+  \end{itemize}
+}
+
+\frame{
+  \frametitle{Comparison of Job Flows}
+  \begin{itemize}
+    \item Construct the following dummy variables for all job changers
+
+          \bigskip
+          $I_{it}=
+            \begin{cases}
+              1 & \text{ if inventor} \\
+              0 & \text{ otherwise}
+            \end{cases}$
+
+          \bigskip
+          $D_{it}=
+            \begin{cases}
+              1 & \text{ if moving to less productive est.} \\
+              0 & \text{ if moving to more productive est.}
+            \end{cases}$
+          \bigskip
+    \item Proxy for productivity of establishments
+          \smallskip
+          \begin{enumerate}
+            \item Size
+                  \smallskip
+            \item Mean wage
+          \end{enumerate}
+  \end{itemize}
+}
+
+\frame{
+  \frametitle{Probit Model}
+  \begin{itemize}
+    \item Do inventors tend to move from high to low relative to general workers?
+  \end{itemize}
+  \begin{align}
+    P(D_{it}=1|I_{it},X_{it}) = & \Phi(\beta_{0} + \beta_{1}I_{it} +\beta_{2}X_{it})\nonumber
+  \end{align}
+  \begin{itemize}
+    \item[--] $i$: job changer without unemployment spell
+      \medskip
+    \item[--] $t$: 2000 - 2019
+      \medskip
+    \item[--] $X_{it}$: age, a square of age, gender, and education
+      \medskip
+    \item[--] No consistency in MLE with FE $\Rightarrow$ No FE
+  \end{itemize}
+}
+
+\frame{
+  \frametitle{Liner Model}
+  \begin{itemize}
+    \item  When moving from high to low, do inventors' wages decrease relative to general workers' wage?
+  \end{itemize}
+  \begin{align}
+    \log w_{it} - \log w_{it-1} = & \beta_{0} + \beta_{1}D_{it} + \beta_{2}D_{it}I_{it} +\beta_{3}X_{it} + \alpha_{e} + \alpha_{t} + \varepsilon_{it}\nonumber
+  \end{align}
+  \begin{itemize}
+    \item[--] $w_{it}$: daily wage of job changer $i$ in year $t$
+      \medskip
+    \item[--] $t$: 2001 - 2019
+      \medskip
+    \item[--] $\alpha_{e}$: Destination establishment
+      \medskip
+    \item[--] $\alpha_{t}$: Year FE
+  \end{itemize}
+}
+
+\frame{
+  \frametitle{Estimation Result: Size \hypertarget{4}{}\hyperlink{3}{\beamerbutton{robustness}}}
+  \begin{table}[t]
+    \begin{center}\footnotesize
+      \begin{tabular}{lcccccc
+        }
+        \hline\hline
+                              & \multicolumn{2}{c}{$P(D_{it}=1|I_{it},X_{it})$} & $\log w_{it} - \log w_{it-1}$                  \\
+                              & Whole sample                                    & Sample with wage $\uparrow$                    \\
+        \hline
+        $I_{it}$              & .006***                                         & .007***                                        \\
+                              & (.003)                                          & (.003)                                         \\
+        $D_{it}$              &                                                 &                               & -.160***       \\
+                              &                                                 &                               & (0.08)         \\
+                              &                                                 &                                                \\
+        $D_{it}\times I_{it}$ &                                                 &                               & .047***        \\
+                              &                                                 &                               & (.007)         \\
+                              &                                                 &                                                \\
+        Const.                & .988***                                         & -.243***                      & .908***        \\
+                              & (.010)                                          & (.014)                        & (.019)         \\\hline
+        Control               & $\surd$                                         & $\surd$                       & $\surd$        \\
+        FE                    &                                                 &                               & $\surd$        \\
+        Year                  & 2000$\sim$2019                                  & 2000$\sim$2019                & 2001$\sim$2019 \\\hline
+        Observations          & 2,096,497                                       & 1,236,728                     & 857,339        \\
+        \hline
+      \end{tabular}
+    \end{center}
+    \vspace{0.05in}
+    \footnotesize{\tiny\textit{Notes:} In the first and second columns, robust SEs are reported in parentheses. In the third column, SEs clustered by year and establishments are reported. * $p<0.1$, ** $p<0.05$, *** $p<0.01$. }
+  \end{table}
+}
+
+\frame{
+  \frametitle{Inventor Job Flow: Summary and Implication}
+  \begin{itemize}
+    \item Inventors are more likely to move to less productive est. in comparison with general workers
+          \bigskip
+    \item  Inventors experience less wage decrease by moving  to less productive est. in comparison with general workers
+          \bigskip
+          \bigskip
+    \item Inventors may transfer substantial knowledge from high to low
+          \bigskip
+    \item Firms may compensate for knowledge diffusion
+  \end{itemize}
+}
+
+\begin{frame}[c,noframenumbering,plain]{}
+  \centering
+  {\LARGE Endogenous Growth Model of \\ Inventor Market Frictions}
+\end{frame}
+
+\begin{frame}{Model Overview}
+  \begin{itemize}
+    \setlength\itemsep{3mm}
+    \item Inventors and firms randomly match in a frictional market
+    \item Inventors engage in in-house R\&D
+    \item A poaching firm learns from a poached firm
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Inventors and Firms}
+  \begin{itemize}
+    \setlength\itemsep{3mm}
+    \item Inventors are ex-ante homogeneous
+    \item Firms are heterogeneous over
+          \begin{enumerate}
+            \item detrended productivity/knowledge $z\in (0,\overline{z}]$
+            \item the number of inventors $n \in (0,\infty)$
+          \end{enumerate}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Matching Technology}
+
+  \begin{itemize}
+    \setlength\itemsep{3mm}
+    \item Posting $v$ vacancies costs $c(v) Z_t$
+          \begin{itemize}
+            \item $c(v)$: increasing and convex in $v$
+            \item $Z_t$: average productivity
+          \end{itemize}
+    \item A vacancy randomly matches an inventor in other firm at an exogenous rate $A$
+  \end{itemize}
+
+\end{frame}
+
+\begin{frame}{Productivity Dynamics}
+
+  \begin{itemize}
+    \setlength\itemsep{3mm}
+    \item {\bf In-house R\&D}: A firm's productivity increases by $\gamma(n)z$
+          \begin{itemize}
+            \item $\gamma_n(n) \geq 0$
+          \end{itemize}
+    \item {\bf Knowledge diffusion}: When a firm $z$ poaches an inventor from a firm $z'$,  the productivity increases by $\alpha(z,z')Z_t$
+          \begin{itemize}
+            \item  $\alpha(z,z')\geq 0$, $\alpha_z(z,z') \leq 0$, $\alpha_{z'}(z,z') \geq 0$
+          \end{itemize}
+    \item {\bf Leapfrog} to the technology frontier $\overline{z}$ with a rate $\eta$
+  \end{itemize}
+
+\end{frame}
+
+\begin{frame}{Contractual Environment}
+  \begin{itemize}
+    \setlength\itemsep{3mm}
+    \item Bertrand competition
+          \begin{enumerate}
+            \item {\footnotesize the poaching firm makes the take-leave wage offer}
+            \item {\footnotesize the targeted firm makes the take-leave wage offer}
+            \item {\footnotesize the inventor decides}
+          \end{enumerate}
+    \item Limited commitment
+          \begin{itemize}
+            \item {\footnotesize inventors can always move to another firm when they match.}
+            \item {\footnotesize inventors cannot commit to any other inventors in-side the firm.}
+          \end{itemize}
+    \item Privately efficient
+          \begin{itemize}
+            \item {\footnotesize the firm posts the privately efficient amount of vacancies}
+            \item {\footnotesize the firm posts the privately efficient take-leave wage offer}
+          \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Joint Value}
+  \begin{itemize}
+    \setlength\itemsep{3mm}
+    \item The firm and its incumbent inventors maximize their joint value $\Omega$
+    \item State space: (1) firm's productivity $z$ and (2) \# of inventors $n$
+    \item Independent of the wage distributions within firms
+    \item Allocations are obtained from $\Omega$
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Which Firms Learn from Which Firms?}
+  \begin{itemize}
+    \item Firm $(z,n)$ can poach inventors from firm $(z',n')$ if
+  \end{itemize}
+  \[\underbrace{\Omega_n(z,n)}_{\substack{\text{Marginal value of inventors} \\ \text{due to in-house R\&D}}} + \underbrace{\alpha(z,z') Z\Omega_z(z,n)}_{\substack{\text{Marginal value of inventors} \\ \text{due to knowledge diffusion}}} >  \underbrace{\Omega_n(z',n')}_{\text{Marginal value of inventors}}\]
+\end{frame}
+
+\begin{frame}{Hamilton-Jacobi-Bellman Equation}
+
+  \begin{align*}
+    \begin{split}
+      &\underbrace{\rho \Omega(z,n)}_{\text{Required return}} = \max_{v \geq 0} \ \underbrace{z}_{\text{Production}} - \underbrace{c(v)Z}_{\text{Hiring cost}} \\
+      & + \underbrace{A v \int\left[\Omega_n(z,n) + \alpha(z,z')Z\Omega_z(z,n)- \Omega_n(z',n')\right]^+dF_{n}(z',n')}_{\text{Poaching hire}} \\ & + \underbrace{\left[\gamma(n) - g\right]z\Omega_z(z,n)}_{\text{In-house R\&D - Obsolescence}} + \underbrace{\eta \left[\Omega(\overline{z},n) - \Omega(z,n)\right]}_{\text{Leapfrog}}\\
+    \end{split}
+  \end{align*}
+  \begin{itemize}
+    \item $g$: economic growth rate
+    \item $F_{n}$: inventor-weighted firm distribution
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Firm-Level Productivity Change }
+  \begin{align*}
+    \mu_z(z,n)z = & \underbrace{\gamma(n)z}_{\text{In-house R\&D}} \\ &+ \underbrace{A v(z,n)Z\int\mathbbm{1}_P(z,n,z',n')\alpha(z,z')dF_{n}(z',n')}_{\text{Knowledge diffusion}}
+  \end{align*}
+  \begin{itemize}
+    \item $\mathbbm{1}_P$: indicator function that takes $1$ if the poach successes
+    \item $g = \max_{n \in \left\{n \ | \  f(\overline{z},n)>0\right\}} \mu_z(\overline{z},n)$
+          \begin{itemize}
+            \item the economic growth rate $=$ the highest productivity growth rate of firms at the technology frotier
+          \end{itemize}
+  \end{itemize}
+\end{frame}
+
+
+
+\begin{frame}{Firm-Level Change in the \# of Inventors}
+
+  \begin{align*}
+    \mu_n(z,n)n = &
+    \underbrace{A v(z,n) \int \mathbbm{1}_P(z,n,z',n')dF_{n}(z',n')}_{\text{Poaching hire}} \\ & - \underbrace{A \mathtt{v}\frac{n}{\mathtt{n}} \int \mathbbm{1}_P(z',n',z,n)dF_{v}(z',n')}_{\text{Poached by other firms}}
+  \end{align*}
+  \vspace{-3mm}
+  \begin{itemize}
+    \item $\mathtt{v}$: total vacancies posted by firms
+    \item $\mathtt{n}$: total inventors
+    \item $F_{v}$: vacancy-weighted firm distribution
+  \end{itemize}
+\end{frame}
+
+\frame{
+  \frametitle{Kolmogorov Forward Equation}
+  \begin{align*}
+    0 = & - \underbrace{\frac{\partial}{\partial n} \left(\mu_n(z,n)n f(z,n)\right)}_{\text{\# of inventor growth}} - \underbrace{\frac{\partial}{\partial z} \left(\left(\mu_z(z,n) - g \right)z f(z,n)\right)}_{\text{Productivity growth}} \\ & \underbrace{-  \eta f(z,n) + \eta \int_{0}^{\overline{z}} f(z,n) dz \Delta(\overline{z}) }_{\text{Leapfrog}}
+  \end{align*}
+  \vspace{-3mm}
+  \begin{itemize}
+    \item $\Delta(\overline{z})$:  Dirac delta function
+  \end{itemize}
+}
+
+\begin{frame}[c,noframenumbering,plain]{}
+  \centering
+  {\LARGE Numerical Exercises}
+\end{frame}
+
+\frame{
+  \frametitle{Numerical Exercises: Functional Forms}
+  \begin{itemize}
+    \item Vacancy cost function: $c(v) = \frac{\overline{c}}{\phi + 1}v^{\phi+1}$
+    \item In-house R\&D rate function: $\gamma(n, i) = \gamma_i n^\delta $
+          \begin{itemize}
+            \item $i \in \left\{h,l\right\}$: firm's innovation state
+            \item Following two-state Markov process
+                  \begin{itemize}
+                    \item $h \rightarrow l$ at rate $\lambda_h$
+                    \item $l \rightarrow h$ at rate $\lambda_l$
+                  \end{itemize}
+            \item Now, the state variables are $(z,n,i)$
+          \end{itemize}
+    \item Knowledge diffusion rate function: $\alpha(z,z') = \alpha\left(\frac{z'}{z}\right)^\beta$
+  \end{itemize}
+}
+
+\frame{
+  \frametitle{Numerical Exercises: Parameter Values}
+  {\footnotesize
+    \begin{center}
+      \begin{tabular}{c c c c}
+        \hline
+        $\rho$         & discount rate                   & 0.0041 & 5 \% annual real interest rate \\
+        \hline
+        $\gamma_h$     & R\&D coefficient                & 0.0005 & 2 \% economic growth           \\
+        \hline
+        $\gamma_l$     & R\&D coefficient                & 0      & normalization                  \\
+        \hline
+        $\delta$       & R\&D curvature                  & 0.5    &                                \\
+        \hline
+        $A$            & matching efficiency             & 0.1    &                                \\
+        \hline
+        $\alpha$       & diffusion rate                  & 0.002  &                                \\
+        \hline
+        $\beta$        & diffusion curvature             & 0.5    &                                \\
+        \hline
+        $\overline{c}$ & vacancy cost coefficient        & 100    & normalization                  \\
+        \hline
+        $\phi$         & vacancy cost elasticity         & 3.45   & Bilal et al. (2022)            \\
+        \hline
+        $\overline{z}$ & detrended frontier productivity & 1      & normalization                  \\
+        \hline
+        $\mathtt{m}$   & total mass of firms             & 1      & normalization                  \\
+        \hline
+        $\mathtt{n}$   & average/total \# of inventors   & 1      & normalization                  \\
+        \hline
+        $\eta$         & leapfrog                        & 0.0003 &                                \\
+        \hline
+        $\lambda_h$    & $h \rightarrow l$               & 0.02   &                                \\
+        \hline
+        $\lambda_l$    & $l \rightarrow h$               & 0.01   &                                \\
+        \hline
+      \end{tabular}
+    \end{center}
+  }
+}
+
+\begin{frame}{Comparative Statics: Matching Efficiency A  \hypertarget{20}{}\hyperlink{21}{\beamerbutton{density of firms}}}
+  \centering
+  \includegraphics[width=12cm]{pic/cs_A.png}
+\end{frame}
+
+\begin{frame}{Inventor Market Frictions $\uparrow$ (A $\downarrow$)  $\rightarrow$ }
+  \begin{enumerate}
+    \setlength\itemsep{3mm}
+    \item Inventor job flow $\downarrow$
+    \item Knowledge diffusion $\downarrow$
+    \item Productivity dispersion (Var($z$)) $\uparrow$
+    \item Firms' incentive of inventor hiring changes ($\rightarrow$ Corr($z$,$n$) $\downarrow$)
+          \begin{itemize}
+            \item High productivity firms (in-house R\&D)
+            \item Low productivity firms (knowledge diffusion) $\uparrow$
+          \end{itemize}
+    \item The number of inventors at technology frontier firms $\downarrow$
+    \item Economic growth rate $\downarrow$
+  \end{enumerate}
+\end{frame}
+
+
+\begin{frame}{A$\downarrow$ is Consistent with German Data  \hypertarget{18}{}\hyperlink{17}{\beamerbutton{inventor job flow trend}}}
+  \begin{center}
+    \begin{tabular}{c c c}
+                                   & 1998   & 2014   \\
+      \hline
+      \hline
+      Inventor job flow rate       & 49.4\% & 12.5\% \\
+      \hline
+      TFP growth rate (5 year ave) & 2.31\% & 0.48\% \\
+      \hline
+      CV of $z$                    & 0.93   & 1.12   \\
+      \hline
+      CV of $n$                    & 4.34   & 3.14   \\
+      \hline
+      Corr($z$, $n$)               & 0.17   & 0.09   \\
+    \end{tabular}
+  \end{center}
+  {\footnotesize
+  \begin{itemize}
+    \item TFP: EU KLEMS, manufacturing
+    \item $z$: patent citation per inventor in each establishment
+    \item $n$: the number of inventors in each establishment
+  \end{itemize}
+  }
+\end{frame}
+
+\begin{frame}{Next steps}
+  \begin{itemize}
+    \setlength\itemsep{3mm}
+    \item Analytical results
+    \begin{itemize}
+      \item existence and uniqueness of stationary equilibrium
+      \item canalization of highest/lowest productivity firms
+    \end{itemize}
+    \item Structural estimation / transition dynamics / policy implication
+    \item Causal effect of inventor job flows on knowledge diffusion using INV-BIO
+    \begin{itemize}
+      \item Use exogenous reasons for the job change
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\appendix
+\backupbegin
+
+\frame{  \thispagestyle{empty}\addtocounter{framenumber}{-1}
+  \begin{center}
+    \LARGE{Appendix}
+  \end{center}
+}
+
+\begin{frame}[c,noframenumbering,plain]{}
+  \centering
+  {\LARGE Plan for Structual Estimation}
+\end{frame}
+
+\begin{frame}{Plan for Structual Estimation \hypertarget{5}{}}
+  \setlength\itemsep{3mm}
+  \begin{center}
+    \begin{tabular}{c c c}
+      \hline
+      $\delta$                 & R\&D curvature                       &                         \\
+      \hline
+      $\beta$                  & diffusion curvature                  &                         \\
+      \hline
+      $A$                      & matching efficiency                  & gross inventor job flow \\
+      \hline
+      $\gamma_h$               & R\&D coefficient                     & economic growth rate    \\
+      \hline
+      $\alpha$                 & diffusion rate                       &                         \\
+      \hline
+      $\lambda_h$, $\lambda_l$ & $h \rightarrow l$, $l \rightarrow h$ &                         \\
+      \hline
+      $\eta$                   & leapfrog                             &                         \\
+      \hline
+    \end{tabular}
+  \end{center}
+  \begin{itemize}
+    \item Other candidate of moments
+          \begin{itemize}
+            \item inventors' job flow over productivity ranks \hyperlink{8}{\beamerbutton{inventor flows}}
+            \item inventors' distribution over productivity ranks \hyperlink{6}{\beamerbutton{inventor dist.}}
+          \end{itemize}
+    \item "IAB Job Vacancy Survey" provides moments related to vacancy.
+  \end{itemize}
+\end{frame}
+
+
+\frame{  \thispagestyle{empty}\addtocounter{framenumber}{-1}
+  \begin{center}
+    \LARGE{Empirical Fact on \\ Establishment-Level Knowledge Growth}
+  \end{center}
+}
+
+\frame{
+  \frametitle{ Firm-Level Knowledge Change: Regression Equation}
+  \begin{align}
+    Z_{et+j} - Z_{et} & = \beta_{0} + \beta_{1}\log(N_{et}) + \beta_{2}J_{Het}  \nonumber
+    \\&+\beta_{3}X_{et} + \alpha_{e} + \alpha_{t} + \varepsilon_{et}\quad(\text{for }j=1\sim5) \nonumber
+  \end{align}
+  \begin{itemize}
+    \item $t=$ 1980 $\sim$ 2014$-j$
+          \medskip
+    \item $Z_{et}$: (2-years forward) patent citations per inventor at est. $e$ in year $t$
+          \medskip
+    \item $N_{et}$: N of inventors
+          \medskip
+    \item $J_{Het}$: N of job changers from a higher productivity est. (incl. 0)
+          \medskip
+    \item $X_{et}$: $Z_{et}$  and log of the establishment's size
+          \medskip
+    \item $\alpha_{e}/\alpha_{t}$: Establishment/Year FE
+  \end{itemize}
+}
+
+\frame{
+  \frametitle{Estimation Reslut \hypertarget{16}{}\hyperlink{15}{\beamerbutton{Robustness}}}
+  \begin{table}[t]
+    \begin{center}\footnotesize
+      \begin{tabular}{lccccc
+        }
+        \hline\hline
+                         & \multicolumn{5}{c}{$Z_{et+j} - Z_{et}$}                                             \\
+                         & $j$=1                                   & $j$=2    & $j$=3    & $j$=4    & $j$=5    \\\hline
+        $\log({N}_{et})$ & .12***                                  & .096***  & .083***  & .024     & .011     \\
+                         & (.020)                                  & (.025)   & (.021)   & (.021)   & (.022)   \\
+                         &                                         &                                           \\
+        $J_{Het}$        & .013***                                 & .013***  & .012***  & .012***  & .013***  \\
+                         & (.003)                                  & (.002)   & (.003)   & (.003)   & (.003)   \\
+                         &                                         &                                           \\
+        Const.           & -.92***                                 & -.847*** & -.774*** & -.853*** & -.748*** \\
+                         & (.17)                                   & (.18)    & (.17)    & (.19)    & (.20)    \\\hline
+        Control          & $\surd$                                 & $\surd$  & $\surd$  & $\surd$  & $\surd$  \\
+        FE               & $\surd$                                 & $\surd$  & $\surd$  & $\surd$  & $\surd$  \\\hline
+        Observations     & 52,326                                  & 51,194   & 49,637   & 47,833   & 45,531   \\
+        \hline
+      \end{tabular}
+    \end{center}
+    \vspace{0.05in}
+    \footnotesize{\tiny \textit{Notes:} $Z_{et}$  is the ratio of the number of forward citations of the establishment's patent after 2 years from $t$,  to the number of inventors at the establishment. $J_{Het}$ is the number of inventors who moved from establishments with a higher backward 3-year moving average of the number of citations. SEs clustered by establishment and year are reported in parenthesis. * $p<0.1$, ** $p<0.05$, *** $p<0.01$.}
+  \end{table}
+}
+
+
+\frame{
+  \frametitle{ Establishment-Level Knowledge Growth: Summary}
+  \begin{itemize}
+    \item Est. with more inventors have higher knowledge growth
+          \smallskip
+          \begin{itemize}
+            \item[--]  $N$ $\uparrow$ by 10\% $\sim$ Citation $\uparrow$ by 0.1
+          \end{itemize}
+          \bigskip
+    \item Est. poaching more from higher knowledge est. have higher knowledge growth
+          \smallskip
+          \begin{itemize}
+            \item[--]  $J_H$ $\uparrow$ by 10 $\sim$ Citation $\uparrow$ by 0.1
+          \end{itemize}
+          \bigskip
+    \item Plan to treat endogeneity issue by using reasons for the job left
+  \end{itemize}
+}
+
+\frame{
+  \frametitle{Distribution of inventors  \hypertarget{13}{}\hyperlink{14}{\beamerbutton{back}}  \hypertarget{6}{}\hyperlink{5}{\beamerbutton{calibration}}}
+  \begin{table}[t]
+    \begin{center}\footnotesize
+      \begin{tabular}{cccccccc
+        }
+        \hline\hline
+        \multicolumn{2}{c}{Est. size}                & $\leq50\%$ & 50-60 & 60-70 & 70-80 & 80-90 & 90-100   \\\hline
+                                                     &            &       &       &       &       &        & \\
+        \multicolumn{2}{c}{Share of Inventors (\%) } & 9.3        & 3.9   & 5.2   & 7.5   & 12.3  & 61.7     \\
+        \\\hline
+      \end{tabular}
+    \end{center}
+  \end{table}
+
+  \begin{table}[t]
+    \begin{center}\footnotesize
+      \begin{tabular}{cccccccc
+        }
+        \hline\hline
+        \multicolumn{2}{c}{Est. mean wage}          & $\leq50\%$ & 50-60 & 60-70 & 70-80 & 80-90 & 90-100   \\\hline
+                                                    &            &       &       &       &       &        & \\
+        \multicolumn{2}{c}{Share of Inventors (\%)} & 10.2       & 6.6   & 10.5  & 14.8  & 24.5  & 33.3     \\
+        \\\hline
+      \end{tabular}
+    \end{center}
+  \end{table}
+
+  \begin{table}[t]
+    \begin{center}\footnotesize
+      \begin{tabular}{cccccccc
+        }
+        \hline\hline
+        \multicolumn{2}{c}{Est. citations/inventors} & $\leq50\%$ & 50-60 & 60-70 & 70-80 & 80-90 & 90-100   \\\hline
+                                                     &            &       &       &       &       &        & \\
+        \multicolumn{2}{c}{Share of Inventors (\%) } & 11.3       & 3.9   & 4.6   & 10.4  & 26.5  & 43.3     \\
+        \\\hline
+      \end{tabular}
+    \end{center}
+  \end{table}
+
+  \begin{table}[t]
+    \begin{center}\footnotesize
+      \begin{tabular}{cccccccc
+        }
+        \hline\hline
+        \multicolumn{2}{c}{Model $z$}                & $\leq50\%$ & 50-60 & 60-70 & 70-80 & 80-90 & 90-100   \\\hline
+                                                     &            &       &       &       &       &        & \\
+        \multicolumn{2}{c}{Share of Inventors (\%) } & 19.7       & 2.8   & 5.5   & 12.6  & 25.6  & 33.9     \\
+        \\\hline
+      \end{tabular}
+    \end{center}
+  \end{table}
+}
+
+
+\frame{
+  \frametitle{Inventor's Job  Flows: Mean Wage \hypertarget{7}{}\hyperlink{8}{\beamerbutton{back}}}
+  \begin{table}[t]
+    \begin{center}\footnotesize
+      \begin{tabular}{ccccccccc
+        }
+        \hline
+        \multicolumn{2}{c}{\multirow{2}{*}{Share of flow (\%) }} & \multicolumn{6}{c}{Destination est. mean wage}                                                                                                                               \\
+                                                                 &                                                & $\leq50\%$           & 50-60                & 60-70                & 70-80                & 80-90                & 90-100   \\\hline
+                                                                 &                                                &                      &                      &                      &                      &                      &        & \\
+                                                                 & $\leq50\%$                                     & 2.9                  & 1.1                  & 1.0                  & 1.1                  & 1.6                  & 1.9      \\
+                                                                 &                                                &                      &                      &                      &                      &                      &          \\
+                                                                 & 50-60                                          & \textcolor{red}{0.8} & 0.9                  & 1.1                  & 0.9                  & 1.0                  & 1.3      \\
+                                                                 &                                                &                      &                      &                      &                      &                      &          \\
+                                                                 & 60-70                                          & \textcolor{red}{1.0} & \textcolor{red}{0.9} & 2.0                  & 2.1                  & 1.9                  & 2.2      \\
+        Origin est.                                              &                                                &                      &                      &                      &                      &                      &          \\
+        mean wage                                                & 70-80                                          & \textcolor{red}{1.4} & \textcolor{red}{1.0} & \textcolor{red}{1.7} & 3.6                  & 3.9                  & 3.4      \\
+                                                                 &                                                &                      &                      &                      &                      &                      &          \\
+                                                                 & 80-90                                          & \textcolor{red}{2.3} & \textcolor{red}{1.5} & \textcolor{red}{2.2} & \textcolor{red}{3.2} & 8.1                  & 7.3      \\
+                                                                 &                                                &                      &                      &                      &                      &                      &          \\
+                                                                 & 90-100                                         & \textcolor{red}{3.2} & \textcolor{red}{2.1} & \textcolor{red}{3.2} & \textcolor{red}{4.0} & \textcolor{red}{7.0} & 15.2     \\
+        \\\hline
+      \end{tabular}
+    \end{center}
+  \end{table}
+  \begin{itemize}
+    \item Higher $\rightarrow$ Lower: \textcolor{red}{35.52}, Lower $\rightarrow$ Higher: 35.48
+  \end{itemize}
+}
+
+\frame{
+  \frametitle{Inventor's Job  Flows: Size}
+  \begin{table}[t]
+    \begin{center}\footnotesize
+      \begin{tabular}{ccccccccc
+        }
+        \hline
+        \multicolumn{2}{c}{\multirow{2}{*}{Share of flow (\%) }} & \multicolumn{6}{c}{Destination est. size}                                                                                                                               \\
+                                                                 &                                           & $\leq50\%$           & 50-60                & 60-70                & 70-80                & 80-90                & 90-100   \\\hline
+                                                                 &                                           &                      &                      &                      &                      &                      &        & \\
+                                                                 & $\leq50\%$                                & 2.6                  & 0.9                  & 0.7                  & 0.8                  & 1.3                  & 5.0      \\
+                                                                 &                                           &                      &                      &                      &                      &                      &          \\
+                                                                 & 50-60                                     & \textcolor{red}{0.4} & 0.5                  & 0.6                  & 0.4                  & 0.5                  & 1.8      \\
+                                                                 &                                           &                      &                      &                      &                      &                      &          \\
+                                                                 & 60-70                                     & \textcolor{red}{0.5} & \textcolor{red}{0.2} & 0.7                  & 0.9                  & 0.7                  & 2.3      \\
+        Origin est.                                              &                                           &                      &                      &                      &                      &                      &          \\
+        size                                                     & 70-80                                     & \textcolor{red}{0.6} & \textcolor{red}{0.3} & \textcolor{red}{0.4} & 1.3                  & 1.6                  & 3.2      \\
+                                                                 &                                           &                      &                      &                      &                      &                      &          \\
+                                                                 & 80-90                                     & \textcolor{red}{1.0} & \textcolor{red}{0.4} & \textcolor{red}{0.6} & \textcolor{red}{0.9} & 2.9                  & 6.1      \\
+                                                                 &                                           &                      &                      &                      &                      &                      &          \\
+                                                                 & 90-100                                    & \textcolor{red}{4.8} & \textcolor{red}{2.1} & \textcolor{red}{2.8} & \textcolor{red}{3.8} & \textcolor{red}{6.4} & 40.3     \\
+        \\\hline
+      \end{tabular}
+    \end{center}
+    \vspace{0.05in}
+    \footnotesize{\tiny\textit{Notes:} Every year, we classify the establishments and calculate the flows for the year based on these classifications. The table shows the total gross flow from 1980 to 2014. The data excludes the employment-unemployment-employment flow.}
+  \end{table}
+  \begin{itemize}
+    \item Higher $\rightarrow$ Lower: \textcolor{red}{25.2}, Lower $\rightarrow$ Higher: 26.8
+  \end{itemize}
+}
+
+\frame{
+  \frametitle{Inventor's Job  Flows: Size (Inventor Wage $\uparrow$) }
+  \begin{table}[t]
+    \begin{center}\footnotesize
+      \begin{tabular}{ccccccccc
+        }
+        \hline\hline
+        \multicolumn{2}{c}{\multirow{2}{*}{Share of flow (\%) }} & \multicolumn{6}{c}{Destination est. size}                                                                                                                               \\
+                                                                 &                                           & $\leq50\%$           & 50-60                & 60-70                & 70-80                & 80-90                & 90-100   \\\hline
+                                                                 &                                           &                      &                      &                      &                      &                      &        & \\
+                                                                 & $\leq50\%$                                & 3.8                  & 1.2                  & 0.9                  & 0.9                  & 1.3                  & 5.3      \\
+                                                                 &                                           &                      &                      &                      &                      &                      &          \\
+                                                                 & 50-60                                     & \textcolor{red}{0.4} & 0.8                  & 0.9                  & 0.5                  & 0.5                  & 1.6      \\
+                                                                 &                                           &                      &                      &                      &                      &                      &          \\
+                                                                 & 60-70                                     & \textcolor{red}{0.4} & \textcolor{red}{0.2} & 1.1                  & 1.2                  & 0.8                  & 2.0      \\
+        Origin est.                                              &                                           &                      &                      &                      &                      &                      &          \\
+        size                                                     & 70-80                                     & \textcolor{red}{0.5} & \textcolor{red}{0.3} & \textcolor{red}{0.4} & 1.9                  & 2.1                  & 2.8      \\
+                                                                 &                                           &                      &                      &                      &                      &                      &          \\
+                                                                 & 80-90                                     & \textcolor{red}{0.7} & \textcolor{red}{0.3} & \textcolor{red}{0.4} & \textcolor{red}{0.8} & 4.0                  & 5.9      \\
+                                                                 &                                           &                      &                      &                      &                      &                      &          \\
+                                                                 & 90-100                                    & \textcolor{red}{2.8} & \textcolor{red}{1.2} & \textcolor{red}{1.7} & \textcolor{red}{2.3} & \textcolor{red}{4.2} & 44.1     \\
+        \\\hline
+      \end{tabular}
+    \end{center}
+  \end{table}
+  \begin{itemize}
+    \item Higher $\rightarrow$ Lower: \textcolor{red}{16.6},  Lower $\rightarrow$ Higher: 27.9
+  \end{itemize}
+}
+
+\frame{
+  \frametitle{Inventor's Job  Flows: Mean Wage (Inventor Wage $\uparrow$)}
+  \begin{table}[t]
+    \begin{center}\footnotesize
+      \begin{tabular}{ccccccccc
+        }
+        \hline\hline
+        \multicolumn{2}{c}{\multirow{2}{*}{Share of flow (\%) }} & \multicolumn{6}{c}{Destination est. mean wage}                                                                                                                               \\
+                                                                 &                                                & $\leq50\%$           & 50-60                & 60-70                & 70-80                & 80-90                & 90-100   \\\hline
+                                                                 &                                                &                      &                      &                      &                      &                      &        & \\
+                                                                 & $\leq50\%$                                     & 4.4                  & 1.5                  & 1.3                  & 1.4                  & 2.0                  & 2.4      \\
+                                                                 &                                                &                      &                      &                      &                      &                      &          \\
+                                                                 & 50-60                                          & \textcolor{red}{0.9} & 1.3                  & 1.6                  & 1.1                  & 1.1                  & 1.4      \\
+                                                                 &                                                &                      &                      &                      &                      &                      &          \\
+                                                                 & 60-70                                          & \textcolor{red}{0.8} & \textcolor{red}{0.9} & 2.6                  & 2.9                  & 1.9                  & 2.2      \\
+        Origin est.                                              &                                                &                      &                      &                      &                      &                      &          \\
+        mean wage                                                & 70-80                                          & \textcolor{red}{0.7} & \textcolor{red}{0.6} & \textcolor{red}{1.6} & 4.8                  & 4.4                  & 3.0      \\
+                                                                 &                                                &                      &                      &                      &                      &                      &          \\
+                                                                 & 80-90                                          & \textcolor{red}{1.0} & \textcolor{red}{0.7} & \textcolor{red}{1.4} & \textcolor{red}{2.6} & 10.5                 & 7.7      \\
+                                                                 &                                                &                      &                      &                      &                      &                      &          \\
+                                                                 & 90-100                                         & \textcolor{red}{1.0} & \textcolor{red}{0.9} & \textcolor{red}{1.4} & \textcolor{red}{2.3} & \textcolor{red}{5.4} & 18.8     \\
+        \\\hline
+      \end{tabular}
+    \end{center}
+  \end{table}
+  \begin{itemize}
+    \item Higher $\rightarrow$ Lower: \textcolor{red}{22.0},  Lower $\rightarrow$ Higher: 35.7
+  \end{itemize}
+}
+
+\frame{
+  \frametitle{Inventor's Job  Flows: Citations/Inventors (Inventor Wage $\uparrow$) }
+  \begin{table}[t]
+    \begin{center}\footnotesize
+      \begin{tabular}{ccccccccc
+        }
+        \hline\hline
+        \multicolumn{2}{c}{\multirow{2}{*}{Share of flow (\%) }} & \multicolumn{6}{c}{Destination est. citation per inventor}                                                                                                                                \\
+                                                                 &                                                            & $\leq50\%$           & 50-60                & 60-70                & 70-80                & 80-90                 & 90-100   \\\hline
+                                                                 &                                                            &                      &                      &                      &                      &                       &        & \\
+                                                                 & $\leq50\%$                                                 & 0.7                  & 0.3                  & 0.2                  & 0.3                  & 0.5                   & 0.8      \\
+                                                                 &                                                            &                      &                      &                      &                      &                       &          \\
+                                                                 & 50-60                                                      & \textcolor{red}{1.2} & 0.6                  & 0.4                  & 0.64                 & 1.0                   & 1.4      \\
+                                                                 &                                                            &                      &                      &                      &                      &                       &          \\
+                                                                 & 60-70                                                      & \textcolor{red}{1.1} & \textcolor{red}{0.5} & 0.6                  & 0.9                  & 1.3                   & 1.5      \\
+        Origin est.                                              &                                                            &                      &                      &                      &                      &                       &          \\
+        citations                                                & 70-80                                                      & \textcolor{red}{1.9} & \textcolor{red}{0.7} & \textcolor{red}{1.0} & 2.2                  & 3.1                   & 3.1      \\
+        per inventor                                             &                                                            &                      &                      &                      &                      &                       &          \\
+                                                                 & 80-90                                                      & \textcolor{red}{3.6} & \textcolor{red}{1.0} & \textcolor{red}{1.2} & \textcolor{red}{3.5} & 10.2                  & 8.2      \\
+                                                                 &                                                            &                      &                      &                      &                      &                       &          \\
+                                                                 & 90-100                                                     & \textcolor{red}{5.9} & \textcolor{red}{1.3} & \textcolor{red}{1.4} & \textcolor{red}{3.7} & \textcolor{red}{10.9} & 23.4     \\
+        \\\hline
+      \end{tabular}
+    \end{center}
+  \end{table}
+  \begin{itemize}
+    \item Higher $\rightarrow$ Lower: \textcolor{red}{38.8} $>$ Lower $\rightarrow$ Higher: 23.6
+  \end{itemize}
+}
+
+\frame{
+  \frametitle{Identified Inventors  \hypertarget{1}{}\hyperlink{2}{\beamerbutton{back}}}
+  \begin{table}[t]
+    \begin{center}\footnotesize
+      \begin{tabular}{lcccc
+        }
+        \hline\hline
+        \multicolumn{2}{l}{Descriptive statistics} & \multicolumn{2}{c}{\underline{SIAB}} & \underline{INV-BIO}                           \\
+        (2000 $\sim$ 2014)                         &                                      & Workers             & "Inventors" & Inventors \\\hline
+        Daily wage, \texteuro                      & Mean                                 & 63.6                & 96.3        & 156.2     \\
+                                                   & S.D.                                 & 52.8                & 60.0        & 30.0      \\
+                                                   &                                      &                     &                         \\
+        Age                                        & Mean                                 & 40.3                & 40.5        & 42.4      \\
+                                                   & S.D.                                 & 13.1                & 12.3        & 9.0       \\
+                                                   &                                      &                     &                         \\
+        \multicolumn{2}{l}{Females, \%}            & 48.3                                 & 14.8                & 5.7                     \\
+        \\
+        \multicolumn{2}{l}{N of obs., thousand}    & 10,727                               & 1,238               & 420                     \\
+        \\\hline
+      \end{tabular}
+    \end{center}
+    \vspace{0.05in}
+    \footnotesize{\textit{Notes:} Workers include "inventors." Available sample periods of SIAB and INV-BIO are 2000$\sim$2019 and 1980$\sim$2014, respectively}
+  \end{table}
+}
+
+\frame{
+  \frametitle{Estimation Result: Mean Wage  \hypertarget{3}{}\hyperlink{4}{\beamerbutton{back}}}
+  \begin{table}[t]
+    \begin{center}\footnotesize
+      \begin{tabular}{lcccccc
+        }
+        \hline\hline
+                              & \multicolumn{2}{c}{$P(D_{it}=1|I_{it},X_{it})$} & $\log w_{it} - \log w_{it-1}$                  \\
+                              & Whole sample                                    & Sample with wage $\uparrow$                    \\
+        \hline
+        $I_{it}$              & .015***                                         & .022***                                        \\
+                              & (.003)                                          & (.003)                                         \\
+        $D_{it}$              &                                                 &                               & -.041***       \\
+                              &                                                 &                               & (0.08)         \\
+                              &                                                 &                                                \\
+        $D_{it}\times I_{it}$ &                                                 &                               & .047***        \\
+                              &                                                 &                               & (.011)         \\
+                              &                                                 &                                                \\
+        Const.                & 1.060***                                        & -.507***                      & .077***        \\
+                              & (.010)                                          & (.014)                        & (.018)         \\\hline
+        Control               & $\surd$                                         & $\surd$                       & $\surd$        \\
+        FE                    &                                                 &                               & $\surd$        \\
+        Year                  & 2000$\sim$2019                                  & 2000$\sim$2019                & 2001$\sim$2019 \\\hline
+        Observations          & 2,054,898                                       & 1,215,995                     & 848,727        \\
+        \hline
+      \end{tabular}
+    \end{center}
+    \vspace{0.05in}
+    \footnotesize{\tiny\textit{Notes:} In the first and second columns, robust SEs are reported in parentheses. In the third column, SEs clustered by year and establishments are reported. * $p<0.1$, ** $p<0.05$, *** $p<0.01$. }
+  \end{table}
+}
+
+\frame{
+  \frametitle{Z = Mean Wage (j$=1\sim5)$ \hypertarget{15}{}\hyperlink{16}{\beamerbutton{back}}}
+  \begin{table}[t]
+    \begin{center}\footnotesize
+      \begin{tabular}{lccccc
+        }
+        \hline\hline
+                        & \multicolumn{5}{c}{$\log (Z_{et+j}) - \log (Z_{et})$}                                             \\
+                        & j=1                                                   & j=2      & j=3      & j=4      & j=5      \\\hline
+        $log({N}_{et})$ & .005***                                               & .008***  & .008***  & .008***  & .008***  \\
+                        & (.001)                                                & (.001)   & (.001)   & (.001)   & (.001)   \\
+                        &                                                       &                                           \\
+        $J_{Het}$       & .0000                                                 & .0001    & .0001    & .0002    & .0004    \\
+                        & (.0001)                                               & (.0002)  & (.0002)  & (.0002)  & (.0002)  \\
+                        &                                                       &                                           \\
+        Const.          & 1.404***                                              & 2.206*** & 2.745*** & 3.162*** & 3.453*** \\
+                        & (.10)                                                 & (.12)    & (.13)    & (.13)    & (.13)    \\\hline
+        Control         & $\surd$                                               & $\surd$  & $\surd$  & $\surd$  & $\surd$  \\
+        FE              & $\surd$                                               & $\surd$  & $\surd$  & $\surd$  & $\surd$  \\\hline
+        Observations    & 105,326                                               & 102,223  & 98,707   & 94,909   & 89,977   \\
+        \hline
+      \end{tabular}
+    \end{center}
+    \vspace{0.05in}
+    \footnotesize{\tiny\textit{Notes:} $Z_{et}$ is the mean daily wage of the full-time employees in the establishment $e$ in year $t$. $J_{Het}$ is the number of inventors who moved from the establishment with a higher mean wage. SEs clustered by establishment and year are reported in parenthesis. * $p<0.1$, ** $p<0.05$, *** $p<0.01$.}
+  \end{table}
+}
+
+\frame{
+  \frametitle{Z = Mean Wage (j$=6\sim10)$}
+  \begin{table}[t]
+    \begin{center}\footnotesize
+      \begin{tabular}{lccccc
+        }
+        \hline\hline
+                        & \multicolumn{5}{c}{$\log (Z_{et+j}) - \log  (Z_{et})$}                                             \\
+                        & j=6                                                    & j=7      & j=8      & j=9      & j=10     \\\hline
+        $log({N}_{et})$ & .007***                                                & .007***  & .008***  & .008***  & .008***  \\
+                        & (.001)                                                 & (.002)   & (.002)   & (.002)   & (.002)   \\
+                        &                                                        &                                           \\
+        $J_{Het}$       & .0006***                                               & .0006*** & .0007*** & .0008*** & .0008*** \\
+                        & (.0002)                                                & (.0002)  & (.0002)  & (.0002)  & (.0003)  \\
+                        &                                                        &                                           \\
+        Const.          & 3.679***                                               & 3.901*** & 4.047*** & 4.205*** & 4.351*** \\
+                        & (.13)                                                  & (.12)    & (.11)    & (.09)    & (.10)    \\\hline
+        Control         & $\surd$                                                & $\surd$  & $\surd$  & $\surd$  & $\surd$  \\
+        FE              & $\surd$                                                & $\surd$  & $\surd$  & $\surd$  & $\surd$  \\\hline
+        Observations    & 84,455                                                 & 78,690   & 72,937   & 67,355   & 61,906   \\
+        \hline
+      \end{tabular}
+    \end{center}
+  \end{table}
+}
+
+\frame{
+  \frametitle{Z = Size (j$=1\sim5)$ }
+  \begin{table}[t]
+    \begin{center}\footnotesize
+      \begin{tabular}{lccccc
+        }
+        \hline\hline
+                        & \multicolumn{5}{c}{$\log (Z_{et+j}) - \log (Z_{et})$}                                             \\
+                        & j=1                                                   & j=2      & j=3      & j=4      & j=5      \\\hline
+        $log({N}_{et})$ & .006**                                                & .0001    & -.007    & -.0118** & -.015**  \\
+                        & (.003)                                                & (.004)   & (.005)   & (.006)   & (.006)   \\
+                        &                                                       &                                           \\
+        $J_{Het}$       & -.0001                                                & .0003    & .0004    & .0004    & -.0004   \\
+                        & (.0004)                                               & (.0006)  & (.0008)  & (.0009)  & (.001)   \\
+                        &                                                       &                                           \\
+        Const.          & 1.042***                                              & 1.606*** & 2.078*** & 2.490*** & 2.886*** \\
+                        & (.11)                                                 & (.14)    & (.16)    & (.18)    & (.20)    \\\hline
+        Control         & $\surd$                                               & $\surd$  & $\surd$  & $\surd$  & $\surd$  \\
+        FE              & $\surd$                                               & $\surd$  & $\surd$  & $\surd$  & $\surd$  \\\hline
+        Observations    & 105,493                                               & 102,379  & 98,860   & 95,046   & 90,101   \\
+        \hline
+      \end{tabular}
+    \end{center}
+    \vspace{0.05in}
+    \footnotesize{\tiny\textit{Notes:} $Z_{et}$ is the number of employees in the establishment $e$ in year $t$. $J_{Het}$ is the number of inventors who moved from the establishment with a higher mean wage. SEs clustered by establishment and year are reported in parenthesis. * $p<0.1$, ** $p<0.05$, *** $p<0.01$.}
+  \end{table}
+}
+
+\begin{frame}{Inventor Job Flow Rate in Germany \hypertarget{17}{}\hyperlink{18}{\beamerbutton{back}}}
+  \centering
+  \includegraphics[width=12cm]{pic/job_flow_rate.png}
+\end{frame}
+
+\frame{
+  \frametitle{Job Flow by Age}
+  \begin{figure}[b]
+    \begin{center}
+      \includegraphics[width=10cm,height=5cm]{pic/For_calibration_0123_Fig2.png}
+    \end{center}
+  \end{figure}
+  \vspace{0.05in}
+  \footnotesize{Average N of inventors for each category (84-14):
+    \\(20-30) 1189, (30-40) 7053, (40-50) 6451, (50-60) 4177, (60-) 583}
+}
+
+\begin{frame}{Density of Firms log f(z,n): A = 0.05 v.s. 0.15 \hypertarget{21}{}\hyperlink{20}{\beamerbutton{back}}}
+  \centering
+  \includegraphics[width=7cm]{pic/density2D_005.png}
+  \centering
+  \includegraphics[width=7cm]{pic/density2D_15.png}
+\end{frame}
+
+\backupend
+
+\end{document}
